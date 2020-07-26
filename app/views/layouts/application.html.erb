@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+  <header class="navbar navbar-fixed-topnavbar-inverse">
+  <div class="container-fluid">
+
+    <nav class="navbar navbar-inverse style="background-color:black>
+  <!-- <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Bookers</a>
+    </div> -->
+  <a class="navbar-brand" href="#">
+  Bookers</a>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+            <li><%= link_to user_path(current_user) do %>
+            <i class="glyphicon glyphicon-home"></i>Home</li>
+            <% end %>
+              <li><%= link_to users_path do %>
+              <i class="glyphicon glyphicon-user"></i>Users</li>
+            <% end %>
+               <li> <%= link_to books_path do %>
+              <i class="glyphicon glyphicon-book"></i>
+              Books</li>
+            <% end %>
+              <li>  <%= link_to destroy_user_session_path, method: :delete do %>
+              <i class="glyphicon glyphicon-log-in"></i>
+              logout</li>
+            <% end %>
+
+        <% else %>
+
+            <li><%= link_to root_path do %>
+              <i class="glyphicon glyphicon-home"></i> Home</li>
+            <% end %>
+                <li><%= link_to home_about_path do %>
+              <i class="glyphicon glyphicon-link"></i> About</li>
+            <% end %>
+                <li><%= link_to new_user_registration_path do %>
+              <i class="glyphicon glyphicon-edit"></i> sign up</li>
+            <% end %>
+              <li><%= link_to new_user_session_path do %>
+              <i class="glyphicon glyphicon-log-in"></i> login</li>
+            <% end %>
+
+         <% end %>
+      </ul>
+    </div>
+  </nav>
+</div>
+</header>
+
+
+
+        <% flash.each do |key, value| %>
+         <%= content_tag(:div, value, class: "#{key}") %>
+        <% end %>
+
+    <%= yield %>
+  </body>
+  <footer class="pull-right">
+  <h5>CopyRight Infratop.inc</h5>
+  </footer>
+</html>
